@@ -1,0 +1,106 @@
+
+
+
+
+it should return exactly what i put up
+
+
+Make view, view passes everything to db db comes back with changed view if it did anything and resource.
+View may have to call db again if there is an expand.
+
+If view syntax is empty just call db it returns resource as is.
+	-View adds the oada junk to it?
+		-Id it could. How does it add changeId?
+		-View thingy can't add changeid. Database has to.
+
+
+Question for everyone:
+	-Are we disallowing _meta in json doc that is uploaded.
+	-You don't put up _id when you upload a file. Is every element going to have a _id
+	-Is _id relative to the document? ie. 123/blah/corn could be an id for a corn key in resource 123.
+	-iphone sdk, and other libs only do get and post. Use x-http-method-override?
+
+Basic tests ----------------------------
+*beforeEach*
+PUT /JSResource
+it should return 200 OK (With id)
+
+GET /JSResource
+it should return json
+
+
+*afterEach*
+Remove /JSResource
+
+
+EXAMPLE SETS
+
+EXAMPLE SET 1 ----------------------------
+*beforeEach*
+PUT /resources
+it should return 200 OK (With id) 
+
+*afterEach*
+Remove /JSResource
+
+GET /resources/_id
+it should return json exactly as i uploaded
+
+GET /resources/123?view={
+ "_id": true
+}
+
+it should return json exactly as i uploaded, with _id key in it at root.
+
+
+
+
+
+EXAMPLE SET 2 ----------------------------
+*beforeEach*
+Put a resource like:
+{
+  "fields": [
+    {
+      "_id": "123"
+    },
+    {
+      "_id": "124"
+    }
+  ]
+}
+PUT /resources
+it should return 200 OK (With id) 
+
+*afterEach*
+Remove /JSResource
+
+GET /resources/_id
+it should return json exactly as i uploaded
+
+GET /resources/123?view={
+ "_id": true
+}
+
+it should return json exactly as i uploaded, with _id key in it at root.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
