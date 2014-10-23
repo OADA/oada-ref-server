@@ -1,10 +1,28 @@
 {
-  "name": "hello-world",
+  "name": "oada-server",
   "version": "0.0.1",
   "description": "hello world test app",
+  "private": true,
+  "scripts": {
+    "start": "node server.js"
+  },
+  "main": "server.js",
   "dependencies": {
-    "body-parser": "^1.9.0",
+    "body-parser": "^1.9.1",
     "express": "4.x",
-    "object-assign": "^1.0.0"
-  }
+    "object-assign": "^1.0.0",
+    "method-override": "2.x",
+    "errorhandler": "^1.2.2",
+    "morgan": "^1.4.1"
+  },
+  "devDependencies": {
+    "mocha": "*",
+    "chai": "*",
+    "supertest": "*"
+  },
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "author": "cyrus"
 }

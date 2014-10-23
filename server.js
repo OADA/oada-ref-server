@@ -1,42 +1,34 @@
 var express = require('express')
 var app = express();
 var objectAssign = require('object-assign');
+var bodyParser = require('body-parser');
+var methodOverride = require('method-override')
+var errorhandler = require('errorhandler')
+var morgan = require('morgan');
+
+var env = process.env.NODE_ENV || 'development';
+app.set('port', process.env.PORT || 9000);
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
+app.use(methodOverride('X-HTTP-Method-Override'));
 
 
-app.configure(function(){
-  app.set('port', process.env.PORT || 5000);
-  app.use(express.bodyParser());
-  app.use(express.methodOverride());
-  app.use(app.router);
+var rest = require('./rest');
+
+app.use('/resources', rest.resources);
+
+
+app.get('/hello',  function(req, res){
+  res.send('hello there.');
 });
 
-app.configure('development', function(){
-  app.use(express.logger('dev'));
-  app.use(express.errorHandler());
+app.listen(app.get('port'), function(){
+  console.log("Example API listening on port " + app.get('port') + ', running in ' + app.settings.env + " mode.");
 });
 
-
-var resources = objectAssign({}, resources || {});
-
-//Post resource
-app.post('/resources', function(req, res){
-  resources["123"] = objectAssign(json[uri] || {}, obj);
-  res.send({"_id": "123"});
-});
-
-//Put resource
-app.put('/resources:_id', function(req, res){
-  var uri = req.params._id;
-  var obj = req.body;
-  resources[uri] = objectAssign(resources[uri] || {}, obj);
-  res.sendStatus(200);
-});
-
-//GET resource
-app.get('/resources/:_id', function(req, res){
-  var uri = req.params._id;
-  if(resources[uri]) {
-    res.send(resources[uri]);
-  } res.sendStatus(404);
-});
-
+if('development' == env) {
+  app.use(morgan('dev'));
+  app.use(errorhandler());
+}
