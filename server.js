@@ -19,11 +19,6 @@ var rest = require('./rest');
 
 app.use('/resources', rest.resources);
 
-
-app.get('/hello',  function(req, res){
-  res.send('hello there.');
-});
-
 app.listen(app.get('port'), function(){
   console.log("Example API listening on port " + app.get('port') + ', running in ' + app.settings.env + " mode.");
 });

@@ -6,6 +6,8 @@ var REST = function(){
 
   var _resources = express.Router();
 
+  var postId = 122;
+
   //Get the resource list
   _resources.get('/', function(req, res, next){
     res.send("resources list");
@@ -13,7 +15,7 @@ var REST = function(){
 
   //Get a resource
   _resources.get('/*', function(req, res, next){
-    console.log("Getting resource with id: " + req.path);
+    console.log("Getting resource with id: " + req.path.substr(1));
 
     var view = null;
     if(typeof(req.query.view) != 'undefined'){
@@ -21,7 +23,7 @@ var REST = function(){
       console.log("View: " + JSON.stringify(view));
     }
 
-    database.get(req.path, view, function(obj, err){
+    database.get(req.path.substr(1), view, function(obj, err){
       if(err || !obj) {
         res.sendStatus(404);
         return;
@@ -37,17 +39,18 @@ var REST = function(){
     console.log("Posting resource: " + JSON.stringify(req.body));
     //Send resource to database
     //TODO have database give back an id
-    var _id = "/123";
+    postId++;
+    var _id = postId.toString();
     database.save(_id, req.body);
-    res.send({"_id": "123"});
+    res.send({"_id": _id});
   });
 
 
   //Delete resource
   _resources.delete("/*", function(req, res, next){
-    console.log("Deleting resource with id: " + req.path);
+    console.log("Deleting resource with id: " + req.path.substr(1));
     //Delete resource in database
-    database.delete(req.path, function(err){
+    database.delete(req.path.substr(1), function(err){
       if(err) {
         res.sendStatus(404);
       } else {
