@@ -4,11 +4,11 @@
 
 Reference Implementation of OADA Server
 
-** Todo **
+**Todo**
 - EVERYTHING
 
-** Doing **
+**Doing**
 - ?view
 
-** Done **
+**Done**
 - NOTHING
