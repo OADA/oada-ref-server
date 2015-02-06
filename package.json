@@ -20,7 +20,7 @@
   "main": "server.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/OADA/oada-ref-server.git"
+    "url": ""
   },
   "dependencies": {
     "body-parser": "^1.9.1",
@@ -31,13 +31,13 @@
     "morgan": "^1.4.1"
   },
   "devDependencies": {
-    "mocha": "*",
     "chai": "*",
+    "gulp": "^3.8.10",
+    "gulp-jscs": "^1.4.0",
+    "gulp-jshint": "^1.9.2",
+    "jshint-stylish": "^1.0.0",
+    "mocha": "*",
     "supertest": "*"
-  },
-  "repository": {
-    "type": "git",
-    "url": ""
   },
   "author": "cyrus"
 }
